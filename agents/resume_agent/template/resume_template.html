@@ -1,0 +1,413 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>简历</title>
+  <style>
+    :root {
+      --accent: #2f67a7;
+      --ink: #142e4c;
+      --slate: #141413;
+      --gray-100: #f0eee6;
+      --gray-300: #d1cfc5;
+      --gray-500: #87867f;
+      --gray-700: #3d3d3a;
+      --bar: #eef3f9;
+      --serif: Georgia, "Noto Serif CJK SC", "Songti SC", STSong, serif;
+      --sans: Inter, ui-sans-serif, system-ui, -apple-system, "PingFang SC", "Microsoft YaHei", sans-serif;
+      --mono: "SFMono-Regular", Consolas, "Liberation Mono", "Microsoft YaHei", monospace;
+    }
+    * { box-sizing: border-box; }
+    html { background: var(--gray-100); }
+    body { margin: 0; color: var(--slate); background: var(--gray-100); font-family: var(--sans);
+           font-size: 11px; line-height: 1.45; -webkit-font-smoothing: antialiased; }
+    a { color: var(--accent); text-decoration: none; }
+
+    .page { width: 210mm; min-height: 297mm; margin: 16px auto; padding: 9mm 11mm 10mm;
+            background: #fff; box-shadow: 0 12px 36px rgba(20,20,19,.12); }
+    .masthead { display: flex; justify-content: space-between; align-items: center; gap: 16px; margin-bottom: 4px; }
+    .identity { flex: 1; min-width: 0; }
+    .name { margin: 0; font-size: 27px; line-height: 1.1; letter-spacing: .06em; font-weight: 750; }
+    .headline { display: inline-block; margin: 6px 0 0; padding: 4px 10px; color: var(--accent);
+                background: #edf3fb; border-radius: 999px; font-weight: 700; font-size: 12px; }
+    .contact { display: flex; flex-wrap: wrap; gap: 5px 14px; margin-top: 7px; color: var(--gray-700); font-size: 10.5px; }
+    .contact-item { display: inline-flex; align-items: center; gap: 5px; white-space: nowrap; }
+    .contact-item svg { width: 12px; height: 12px; fill: var(--accent); flex: none; }
+    .photo-box { width: 23mm; height: 30mm; flex: none; display: flex; align-items: center; justify-content: center;
+                 overflow: hidden; color: #8a939d; font-size: 9.5px; text-align: center; white-space: pre-line;
+                 background: #f3f4f5; border: 1px dashed #cbd1d7; border-radius: 3px; }
+    .photo-box img { width: 100%; height: 100%; object-fit: cover; }
+    .photo-box.has-photo { border: 1px solid #cbd1d7; }
+    body.mode-edit .photo-box { cursor: pointer; }
+
+    .section { margin-top: 3.5mm; }
+    .section-title { margin: 0 0 1.8mm; padding-bottom: 1mm; border-bottom: 2px solid var(--accent);
+                     color: var(--accent); font-size: 15px; font-weight: 800; letter-spacing: .035em; }
+    .summary { margin: 0; padding: 9px 11px; color: #2f3947; background: #eef3f9;
+               border-left: 4px solid var(--accent); border-radius: 0 6px 6px 0; line-height: 1.6; }
+
+    .edu-row { display: grid; grid-template-columns: 1fr auto; gap: 4mm; padding: 2.2mm 3mm;
+               border-left: 4px solid #9ba8b4; background: #f1f2f4; break-inside: avoid; }
+    .edu-row + .edu-row { margin-top: 2mm; }
+    .edu-school { color: var(--ink); font-size: 11.6px; font-weight: 800; }
+    .edu-program { margin-left: 2mm; font-weight: 650; }
+    .dates { white-space: nowrap; color: var(--gray-700); font-family: var(--mono); font-size: 9.5px; }
+
+    .experience { margin-bottom: 3.5mm; }
+    .company-bar { display: grid; grid-template-columns: minmax(0,1fr) auto; align-items: center; gap: 4mm;
+                   min-height: 8mm; padding: 1.6mm 3mm; border-left: 5px solid var(--accent);
+                   background: var(--bar); break-after: avoid; }
+    .company-left { display: flex; align-items: baseline; flex-wrap: wrap; gap: 1mm 2mm; min-width: 0; }
+    .company-name { color: var(--ink); font-size: 12.2px; font-weight: 850; }
+    .company-team, .company-title { font-weight: 650; }
+    .sep { color: var(--gray-500); }
+
+    .project { padding: 2mm 2mm 0 3.4mm; margin-left: 1.7mm; border-left: 1px solid var(--gray-300); break-inside: avoid-page; }
+    .project + .project { margin-top: 2.2mm; padding-top: 2.4mm; border-top: 1px dotted var(--gray-300); }
+    .project-head { display: flex; justify-content: space-between; gap: 3mm; }
+    .project-title { font-family: var(--serif); font-size: 12px; font-weight: 850; color: #1f4d70; }
+    .project-sub { margin-left: 2mm; color: var(--gray-700); font-weight: 650; }
+    .fact-block { display: grid; grid-template-columns: 17mm minmax(0,1fr); gap: 1.8mm; margin-top: 1mm; }
+    .fact-label { color: var(--accent); font-weight: 800; white-space: nowrap; }
+    .fact-list { margin: 0; padding-left: 4.2mm; }
+    .fact-list li { margin: 0 0 .6mm; padding-left: .5mm; }
+    .fact-list li::marker { color: var(--gray-500); }
+    .keywords { color: var(--gray-700); font-family: var(--mono); font-size: 8.9px; }
+    .standalone .project { margin-left: 0; border-left: 3px solid #e3dacc; background: rgba(240,238,230,.45); padding-bottom: 1.6mm; }
+    .standalone .project + .project { margin-top: 2.4mm; border-top: 0; }
+
+    .compact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 3mm 6mm; }
+    .award-line { display: flex; justify-content: space-between; gap: 3mm; padding: 1mm 0; border-bottom: 1px dotted var(--gray-300); }
+    .skill-list { display: flex; flex-wrap: wrap; gap: 1.4mm; align-content: flex-start; }
+    .skill { padding: .6mm 1.5mm; border: 1px solid var(--gray-300); background: #faf9f5; border-radius: 2px;
+             font-family: var(--mono); font-size: 8.9px; }
+    strong.metric { color: #c65d36; }
+
+    /* interactive states (preview only) */
+    body.mode-edit [data-cc-id] { outline: 1px dashed transparent; border-radius: 2px; cursor: text; }
+    body.mode-edit [data-cc-id]:hover { outline-color: #9db8e8; background: #f5f8ff; }
+    body.mode-edit [data-cc-id]:focus { outline: 2px solid #1f5eff; background: #fff; }
+    body.mode-select .item:hover, body.mode-target .item:hover { background: #fff7e6; }
+    body.mode-target [data-cc-block] { cursor: pointer; border-radius: 4px; transition: outline-color .15s, background .15s; }
+    body.mode-target [data-cc-block]:hover { outline: 2px dashed #8fb0ff; outline-offset: 2px; }
+    .cc-block-hl { outline: 2px solid #3370ff !important; outline-offset: 2px; background: rgba(51,112,255,.05) !important; }
+    .cc-hl { background: #fff1b8 !important; box-shadow: 0 0 0 2px #ffd666; border-radius: 2px; }
+    .cc-preview { background: #e8f8ec !important; box-shadow: 0 0 0 2px #95de64; border-radius: 2px; }
+
+    @page { size: A4; margin: 10mm 11mm; }
+    @media print {
+      html, body { background: #fff; }
+      .page { width: auto; min-height: auto; margin: 0; padding: 0; box-shadow: none; }
+      .company-bar, .edu-row, .skill, .headline, .summary, .standalone .project { print-color-adjust: exact; -webkit-print-color-adjust: exact; }
+      .section-title, .company-bar, .project-head { break-after: avoid; }
+    }
+  </style>
+</head>
+<body>
+  <main id="resume" class="page"></main>
+  <script id="resume-data" type="application/json">__RESUME_JSON__</script>
+  <script>
+  (() => {
+    'use strict';
+    const INTERACTIVE = __INTERACTIVE__;
+    const data = JSON.parse(document.getElementById('resume-data').textContent);
+    const root = document.getElementById('resume');
+    const pres = data.presentation || {};
+    const hidden = new Set(pres.hidden_ids || []);
+    if (/^#[0-9a-f]{6}$/i.test(pres.accent_color || '')) document.documentElement.style.setProperty('--accent', pres.accent_color);
+
+    const el = (tag, cls, text) => {
+      const n = document.createElement(tag);
+      if (cls) n.className = cls;
+      if (text !== undefined && text !== null) n.textContent = String(text);
+      return n;
+    };
+    // field node: editable by key "<id>.<field>"
+    const field = (tag, cls, key, text) => {
+      const n = el(tag, cls, text || '');
+      n.dataset.ccId = key;
+      return n;
+    };
+    // polishable sentence: highlight numbers
+    const item = (tag, cls, it) => {
+      const n = el(tag, (cls ? cls + ' ' : '') + 'item');
+      n.dataset.ccId = it.id;
+      n.dataset.ccItem = '1';
+      const text = String(it.text || '');
+      const re = /\d+(?:\.\d+)?\s*(?:%|％|倍|万|亿|k|K|w|W|人|项|个|次|家|条|份|台|套|小时|分钟|秒|天|周|月|ms|s|GB|MB|TB|QPS|TPS)?/g;
+      let cursor = 0;
+      for (const m of text.matchAll(re)) {
+        const s = m.index, tok = m[0];
+        const before = text[s - 1] || '', after = text[s + tok.length] || '';
+        const dateLike = ['.', '/', '-'].includes(before) || ['.', '/', '-'].includes(after) || /^(19|20)\d{2}$/.test(tok.trim());
+        n.append(document.createTextNode(text.slice(cursor, s)));
+        n.append(dateLike ? document.createTextNode(tok) : el('strong', 'metric', tok));
+        cursor = s + tok.length;
+      }
+      n.append(document.createTextNode(text.slice(cursor)));
+      return n;
+    };
+    const visibleItems = list => (list || []).filter(x => x && x.text && !hidden.has(x.id));
+    const section = title => { const s = el('section', 'section'); s.append(el('h2', 'section-title', title)); root.append(s); return s; };
+    const icon = kind => {
+      const paths = {
+        location: 'M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7zm0 9.5A2.5 2.5 0 1 1 12 6a2.5 2.5 0 0 1 0 5.5z',
+        phone: 'M6.62 10.79a15.5 15.5 0 0 0 6.59 6.59l2.2-2.2a1 1 0 0 1 1.02-.24c1.12.37 2.33.57 3.57.57a1 1 0 0 1 1 1V20a1 1 0 0 1-1 1C10.61 21 3 13.39 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.25.2 2.45.57 3.57a1 1 0 0 1-.25 1.02l-2.2 2.2z',
+        email: 'M20 4H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2zm0 4-8 5-8-5V6l8 5 8-5v2z',
+        link: 'M3.9 12a5 5 0 0 1 5-5H12v2H8.9a3 3 0 1 0 0 6H12v2H8.9a5 5 0 0 1-5-5zm5.1 1v-2h6v2H9zm6-6h3.1a5 5 0 1 1 0 10H15v-2h3.1a3 3 0 1 0 0-6H15V7z',
+      };
+      const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+      svg.setAttribute('viewBox', '0 0 24 24');
+      const p = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+      p.setAttribute('d', paths[kind]); svg.append(p); return svg;
+    };
+    // 可被“指定修改”点选的模块
+    const block = (node, blockId, label) => { node.dataset.ccBlock = blockId; node.dataset.ccLabel = label; return node; };
+    const safeUrl = v => { try { const u = new URL(v); return ['http:', 'https:'].includes(u.protocol) ? v : null; } catch (_) { return null; } };
+
+    // ---------------- masthead
+    const b = data.basic || {};
+    document.title = [b.name, '简历'].filter(Boolean).join(' - ');
+    const head = el('header', 'masthead');
+    const id = el('div', 'identity');
+    id.append(field('h1', 'name', 'basic.name', b.name || '姓名'));
+    if (b.headline || INTERACTIVE) {
+      const h = item('p', 'headline', { id: 'basic.headline', text: b.headline || '求职方向', evidence_ids: b.headline_evidence_ids || [] });
+      id.append(h);
+    }
+    const contacts = el('div', 'contact');
+    [['location', 'basic.city', b.city], ['phone', 'basic.phone', b.phone], ['email', 'basic.email', b.email]].forEach(([k, key, v]) => {
+      if (!v) return;
+      const w = el('span', 'contact-item'); w.append(icon(k), field('span', '', key, v)); contacts.append(w);
+    });
+    (b.links || []).forEach(l => {
+      const url = safeUrl(l.url); if (!url) return;
+      const w = el('span', 'contact-item'); const a = el('a', '', l.label || url);
+      a.href = url; a.target = '_blank'; a.rel = 'noopener noreferrer';
+      w.append(icon('link'), a); contacts.append(w);
+    });
+    id.append(contacts);
+    head.append(id);
+    if (pres.photo || INTERACTIVE) {
+      const box = el('div', 'photo-box');
+      if (pres.photo && /^data:image\//.test(pres.photo)) {
+        const img = el('img'); img.src = pres.photo; img.alt = '证件照'; box.append(img); box.classList.add('has-photo');
+      } else { box.textContent = '证件照\n编辑模式下点击添加'; }
+      box.id = 'cc-photo';
+      head.append(box);
+    }
+    root.append(head);
+
+    if (b.summary) {
+      const s = section('个人简介');
+      s.append(block(item('p', 'summary', { id: 'basic.summary', text: b.summary, evidence_ids: b.summary_evidence_ids || [] }), 'basic.summary', '个人简介'));
+    }
+
+    // ---------------- education
+    const edus = (data.education || []).filter(e => !hidden.has(e.id));
+    if (edus.length) {
+      const s = section('教育经历');
+      edus.forEach(e => {
+        const row = block(el('div', 'edu-row'), e.id, `教育｜${e.school || '未命名'}`);
+        const main = el('div', '');
+        const top = el('div', '');
+        top.append(field('span', 'edu-school', e.id + '.school', e.school));
+        const prog = el('span', 'edu-program');
+        prog.append(field('span', '', e.id + '.major', e.major));
+        if (e.degree) { prog.append(el('span', 'sep', '｜')); prog.append(field('span', '', e.id + '.degree', e.degree)); }
+        top.append(prog);
+        main.append(top);
+        const bl = visibleItems(e.bullets);
+        if (bl.length) { const ul = el('ul', 'fact-list'); bl.forEach(x => ul.append(item('li', '', x))); main.append(ul); }
+        row.append(main, field('div', 'dates', e.id + '.dates', e.dates));
+        s.append(row);
+      });
+    }
+
+    // ---------------- projects
+    const factBlock = (label, items) => {
+      const list = visibleItems(items);
+      if (!list.length) return null;
+      const blk = el('div', 'fact-block');
+      blk.append(el('div', 'fact-label', label));
+      const ul = el('ul', 'fact-list');
+      list.forEach(x => ul.append(item('li', '', x)));
+      const body = el('div', ''); body.append(ul); blk.append(body);
+      return blk;
+    };
+    const renderProject = (p, withDates) => {
+      const box = block(el('div', 'project'), p.id, `项目｜${p.name || '未命名项目'}`);
+      const h = el('div', 'project-head');
+      const t = el('div', '');
+      if (p.name || INTERACTIVE) t.append(field('span', 'project-title', p.id + '.name', p.name || (INTERACTIVE ? '项目名称' : '')));
+      if (p.role) { const sub = el('span', 'project-sub'); sub.append(document.createTextNode('— ')); sub.append(field('span', '', p.id + '.role', p.role)); t.append(sub); }
+      else if (p.subtitle) { const sub = el('span', 'project-sub'); sub.append(document.createTextNode('— ')); sub.append(field('span', '', p.id + '.subtitle', p.subtitle)); t.append(sub); }
+      h.append(t);
+      if (withDates && p.dates) h.append(field('span', 'dates', p.id + '.dates', p.dates));
+      box.append(h);
+      [['背景：', p.background], ['我的职责：', p.responsibilities], ['成果：', p.impact]].forEach(([label, items]) => {
+        const blk = factBlock(label, items); if (blk) box.append(blk);
+      });
+      if ((p.keywords || []).length) {
+        const blk = el('div', 'fact-block');
+        blk.append(el('div', 'fact-label', '技术关键词：'));
+        blk.append(field('div', 'keywords', p.id + '.keywords', p.keywords.join(' / ')));
+        box.append(blk);
+      }
+      return box;
+    };
+
+    const exps = (data.experience || []).filter(x => !hidden.has(x.id));
+    if (exps.length) {
+      const s = section('实习 / 工作经历');
+      exps.forEach(x => {
+        const wrap = el('article', 'experience');
+        const bar = block(el('div', 'company-bar'), x.id, `经历｜${x.company || '未命名'}（全部项目）`);
+        const left = el('div', 'company-left');
+        left.append(field('span', 'company-name', x.id + '.company', x.company));
+        if (x.team) { left.append(el('span', 'sep', '｜')); left.append(field('span', 'company-team', x.id + '.team', x.team)); }
+        if (x.title) { left.append(el('span', 'sep', '｜')); left.append(field('span', 'company-title', x.id + '.title', x.title)); }
+        bar.append(left, field('span', 'dates', x.id + '.dates', x.dates));
+        wrap.append(bar);
+        (x.projects || []).filter(p => !hidden.has(p.id)).forEach(p => wrap.append(renderProject(p, true)));
+        s.append(wrap);
+      });
+    }
+    const projs = (data.projects || []).filter(p => !hidden.has(p.id));
+    if (projs.length) {
+      const s = section('项目经历');
+      const wrap = el('div', 'standalone');
+      projs.forEach(p => wrap.append(renderProject(p, true)));
+      s.append(wrap);
+    }
+
+    // ---------------- awards & skills
+    const awards = (data.awards || []).filter(a => !hidden.has(a.id) && a.name);
+    const skills = data.skills || [];
+    if (awards.length || skills.length) {
+      const s = section(awards.length && skills.length ? '奖项与技能' : (awards.length ? '获奖情况' : '专业技能'));
+      const grid = el('div', awards.length && skills.length ? 'compact-grid' : '');
+      if (skills.length) {
+        const list = el('div', 'skill-list');
+        if (INTERACTIVE) { list.append(field('span', 'skill', 'skills', skills.join('、'))); }
+        else { skills.forEach(k => list.append(el('span', 'skill', k))); }
+        grid.append(list);
+      }
+      if (awards.length) {
+        const col = el('div', '');
+        awards.forEach(a => {
+          const row = el('div', 'award-line');
+          row.append(field('span', '', a.id + '.name', a.name), field('span', 'dates', a.id + '.date', a.date));
+          col.append(row);
+        });
+        grid.append(col);
+      }
+      s.append(grid);
+    }
+
+    if (!INTERACTIVE) return;
+
+    // ---------------- interactive bridge (preview inside the app)
+    const post = msg => window.parent.postMessage(Object.assign({ source: 'careercraft' }, msg), '*');
+    let mode = 'view';
+    const nodes = () => Array.from(document.querySelectorAll('[data-cc-id]'));
+    const setMode = m => {
+      mode = m;
+      document.body.className = 'mode-' + m;
+      nodes().forEach(n => { if (m === 'edit') n.setAttribute('contenteditable', 'true'); else n.removeAttribute('contenteditable'); });
+    };
+    nodes().forEach(n => {
+      n.dataset.ccOrig = n.innerText;
+      if (n.dataset.ccItem !== undefined) {
+        n.addEventListener('mouseenter', () => {
+          const rect = n.getBoundingClientRect();
+          post({ type: 'cc-citation', id: n.dataset.ccId,
+                 rect: { top: rect.top, left: rect.left, right: rect.right, bottom: rect.bottom } });
+        });
+        n.addEventListener('mouseleave', () => post({ type: 'cc-citation-hide', id: n.dataset.ccId }));
+      }
+      n.addEventListener('keydown', e => { if (e.key === 'Enter') { e.preventDefault(); n.blur(); } });
+      n.addEventListener('blur', () => {
+        if (mode !== 'edit') return;
+        const text = n.innerText.replace(/\s+\n/g, '\n').trim();
+        if (text !== n.dataset.ccOrig) { n.dataset.ccOrig = text; post({ type: 'cc-edit', id: n.dataset.ccId, text }); }
+      });
+      n.addEventListener('paste', e => {
+        if (mode !== 'edit') return;
+        e.preventDefault();
+        document.execCommand('insertText', false, (e.clipboardData || window.clipboardData).getData('text/plain'));
+      });
+    });
+    const targeting = () => mode === 'select' || mode === 'target';
+    let selectedJustNow = false;
+    // 选中文字：精确到句子
+    document.addEventListener('mouseup', e => {
+      if (!targeting()) return;
+      const sel = window.getSelection();
+      if (!sel || sel.isCollapsed || !sel.rangeCount) return;
+      const range = sel.getRangeAt(0);
+      const ids = Array.from(document.querySelectorAll('[data-cc-item]'))
+        .filter(n => range.intersectsNode(n)).map(n => n.dataset.ccId);
+      if (!ids.length) return;
+      selectedJustNow = true;
+      const rect = range.getBoundingClientRect();
+      post({ type: 'cc-select', ids: Array.from(new Set(ids)), text: sel.toString().slice(0, 500),
+             append: e.ctrlKey || e.metaKey || e.shiftKey,
+             rect: { top: rect.top, left: rect.left, bottom: rect.bottom, right: rect.right } });
+    });
+    // 点击模块：整段（项目 / 经历 / 教育 / 个人简介）；按住 Ctrl/Shift 可多选
+    document.addEventListener('click', e => {
+      if (!targeting()) return;
+      if (selectedJustNow) { selectedJustNow = false; return; }
+      const node = e.target.closest && e.target.closest('[data-cc-block]');
+      if (!node) return;
+      e.preventDefault();
+      post({ type: 'cc-target', block: node.dataset.ccBlock, label: node.dataset.ccLabel,
+             append: e.ctrlKey || e.metaKey || e.shiftKey });
+    });
+    const photo = document.getElementById('cc-photo');
+    if (photo) {
+      const input = el('input'); input.type = 'file'; input.accept = 'image/*'; input.hidden = true;
+      document.body.append(input);
+      photo.addEventListener('click', () => { if (mode === 'edit') input.click(); });
+      input.addEventListener('change', () => {
+        const f = input.files && input.files[0]; if (!f) return;
+        if (f.size > 2 * 1024 * 1024) { alert('图片请小于 2MB'); return; }
+        const r = new FileReader(); r.onload = () => post({ type: 'cc-photo', dataUrl: r.result }); r.readAsDataURL(f);
+      });
+    }
+    window.addEventListener('message', e => {
+      const msg = e.data || {};
+      if (msg.type === 'cc-mode') setMode(msg.mode);
+      if (msg.type === 'cc-highlight') {
+        const ids = new Set(msg.ids || []);
+        const blocks = new Set(msg.blocks || []);
+        nodes().forEach(n => n.classList.toggle('cc-hl', ids.has(n.dataset.ccId)));
+        document.querySelectorAll('[data-cc-block]').forEach(n => n.classList.toggle('cc-block-hl', blocks.has(n.dataset.ccBlock)));
+        const first = document.querySelector('.cc-block-hl, .cc-hl');
+        if (first && msg.scroll) first.scrollIntoView({ block: 'center', behavior: 'smooth' });
+      }
+      // 预览替换：临时把句子换成新文字（绿色），不修改数据
+      if (msg.type === 'cc-preview') {
+        const items = msg.items || {};
+        document.querySelectorAll('[data-cc-id]').forEach(n => {
+          const id = n.dataset.ccId;
+          if (id in items) {
+            if (n.dataset.ccPrev === undefined) n.dataset.ccPrev = n.innerHTML;
+            n.textContent = items[id];
+            n.classList.add('cc-preview');
+          } else if (n.dataset.ccPrev !== undefined) {
+            n.innerHTML = n.dataset.ccPrev; delete n.dataset.ccPrev; n.classList.remove('cc-preview');
+          }
+        });
+        const first = document.querySelector('.cc-preview');
+        if (first) first.scrollIntoView({ block: 'center', behavior: 'smooth' });
+      }
+    });
+    setMode('view');
+    post({ type: 'cc-ready', height: document.documentElement.scrollHeight });
+  })();
+  </script>
+</body>
+</html>

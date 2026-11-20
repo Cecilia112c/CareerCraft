@@ -1,0 +1,209 @@
+/* CareerCraft 设计规范：参考字节跳动招聘 / 腾讯校招——白底、单一品牌蓝、大留白、8px 栅格 */
+:root {
+  /* 品牌色 */
+  --cc-primary: #3370ff;
+  --cc-primary-hover: #5b8cff;
+  --cc-primary-active: #245bdb;
+  --cc-primary-weak: #f0f4ff;
+  --cc-primary-border: #bacefd;
+
+  /* 文字：标题 / 正文 / 次要 / 占位 */
+  --cc-text-1: #1f2329;
+  --cc-text-2: #4e5969;
+  --cc-text-3: #8f959e;
+  --cc-text-4: #bbbfc4;
+
+  /* 背景与线条 */
+  --cc-bg: #f5f6f7;
+  --cc-bg-2: #fafbfc;
+  --cc-card: #ffffff;
+  --cc-border: #e4e6eb;
+  --cc-border-light: #eff0f1;
+
+  --cc-success: #00b42a;
+  --cc-warning: #ff8800;
+  --cc-danger: #f54a45;
+  --cc-salary: #f54a45;
+
+  /* 字号：12 / 13 / 14（正文）/ 16 / 18 / 20 / 28 / 36 */
+  --fs-xs: 12px;
+  --fs-sm: 13px;
+  --fs-base: 14px;
+  --fs-md: 16px;
+  --fs-lg: 18px;
+  --fs-xl: 20px;
+  --fs-2xl: 28px;
+  --fs-3xl: 36px;
+
+  /* 间距：8px 栅格 */
+  --sp-1: 4px;
+  --sp-2: 8px;
+  --sp-3: 12px;
+  --sp-4: 16px;
+  --sp-5: 20px;
+  --sp-6: 24px;
+  --sp-8: 32px;
+  --sp-10: 40px;
+
+  --cc-radius: 12px;
+  --cc-radius-sm: 8px;
+  --cc-shadow: 0 2px 8px rgba(31, 35, 41, .04);
+  --cc-shadow-hover: 0 8px 24px rgba(31, 35, 41, .08);
+  --cc-header-h: 64px;
+  --cc-content-w: 1200px;
+
+  /* Element Plus 主题 */
+  --el-color-primary: #3370ff;
+  --el-color-primary-light-3: #709bff;
+  --el-color-primary-light-5: #99b8ff;
+  --el-color-primary-light-7: #c2d4ff;
+  --el-color-primary-light-8: #d6e2ff;
+  --el-color-primary-light-9: #f0f4ff;
+  --el-color-primary-dark-2: #245bdb;
+  --el-color-danger: #f54a45;
+  --el-color-success: #00b42a;
+  --el-color-warning: #ff8800;
+  --el-text-color-primary: #1f2329;
+  --el-text-color-regular: #4e5969;
+  --el-text-color-secondary: #8f959e;
+  --el-border-color: #e4e6eb;
+  --el-border-color-light: #eff0f1;
+  --el-border-radius-base: 8px;
+  --el-font-size-base: 14px;
+  --el-font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Microsoft YaHei", "Helvetica Neue", Arial, sans-serif;
+}
+
+* { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; }
+body {
+  font-family: var(--el-font-family);
+  font-size: var(--fs-base);
+  line-height: 1.6;
+  color: var(--cc-text-1);
+  background: var(--cc-bg);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+a { color: var(--cc-primary); text-decoration: none; transition: color .2s; }
+a:hover { color: var(--cc-primary-hover); }
+h1, h2, h3, h4 { color: var(--cc-text-1); line-height: 1.4; }
+::selection { background: #d6e2ff; }
+
+/* ---------------- 页面容器 */
+.page { max-width: var(--cc-content-w); margin: 0 auto; padding: var(--sp-8) var(--sp-6) 64px; }
+.page-title { display: flex; align-items: flex-end; justify-content: space-between; gap: var(--sp-4); margin: 0 0 var(--sp-6); }
+.page-title h1 { margin: 0; font-size: var(--fs-2xl); font-weight: 600; letter-spacing: .5px; }
+.page-title .sub { color: var(--cc-text-3); font-size: var(--fs-base); margin-top: var(--sp-2); }
+
+/* 页面头部横幅（腾讯校招 / 字节招聘风格） */
+.banner {
+  background: linear-gradient(135deg, #eaf1ff 0%, #f5f8ff 45%, #ffffff 100%);
+  border-bottom: 1px solid var(--cc-border-light);
+}
+.banner-inner { max-width: var(--cc-content-w); margin: 0 auto; padding: 40px var(--sp-6) 32px; }
+.banner h1 { margin: 0 0 var(--sp-2); font-size: var(--fs-3xl); font-weight: 600; letter-spacing: 1px; }
+.banner .sub { color: var(--cc-text-2); font-size: var(--fs-md); }
+
+/* ---------------- 卡片 */
+.card {
+  background: var(--cc-card);
+  border: 1px solid var(--cc-border-light);
+  border-radius: var(--cc-radius);
+  padding: var(--sp-6);
+  box-shadow: var(--cc-shadow);
+}
+.card + .card { margin-top: var(--sp-4); }
+.card-title {
+  display: flex; align-items: center; justify-content: space-between;
+  margin: 0 0 var(--sp-4); font-size: var(--fs-lg); font-weight: 600;
+}
+.card-title .el-button { font-weight: 400; }
+
+/* ---------------- 通用工具类 */
+.muted { color: var(--cc-text-3); font-size: var(--fs-sm); }
+.text-2 { color: var(--cc-text-2); }
+.row { display: flex; align-items: center; gap: var(--sp-3); }
+.grow { flex: 1; min-width: 0; }
+.mt8 { margin-top: var(--sp-2); } .mt16 { margin-top: var(--sp-4); } .mt24 { margin-top: var(--sp-6); }
+.mb8 { margin-bottom: var(--sp-2); } .mb16 { margin-bottom: var(--sp-4); }
+.ellipsis { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.dot-sep::before { content: "·"; margin: 0 6px; color: var(--cc-text-4); }
+.salary { color: var(--cc-salary); font-weight: 600; white-space: nowrap; }
+
+/* 标签（招聘站常用的浅灰胶囊） */
+.pill {
+  display: inline-flex; align-items: center; height: 24px; padding: 0 var(--sp-2);
+  border-radius: 4px; background: #f2f3f5; color: var(--cc-text-2); font-size: var(--fs-xs);
+  white-space: nowrap;
+}
+.pill.blue { background: var(--cc-primary-weak); color: var(--cc-primary); }
+.pill.green { background: #e8f8ec; color: #00a828; }
+.pill.orange { background: #fff3e6; color: #e07000; }
+.pill.red { background: #feeceb; color: #e2403b; }
+.pills { display: flex; flex-wrap: wrap; gap: 6px; }
+
+/* 匹配分徽标 */
+.score {
+  display: inline-flex; align-items: center; justify-content: center; min-width: 44px; height: 24px;
+  padding: 0 var(--sp-2); border-radius: 12px; font-weight: 600; font-size: var(--fs-sm);
+}
+.score.high { color: #00a828; background: #e8f8ec; }
+.score.mid { color: #e07000; background: #fff3e6; }
+.score.low { color: var(--cc-text-3); background: #f2f3f5; }
+
+.quote {
+  margin: var(--sp-2) 0; padding: var(--sp-2) var(--sp-3); border-left: 3px solid var(--cc-primary-border);
+  background: var(--cc-bg-2); color: var(--cc-text-2); font-size: var(--fs-sm); border-radius: 0 6px 6px 0;
+}
+
+/* ---------------- Element Plus 微调：更大的点击区域与更舒展的表单 */
+.el-button { font-weight: 500; }
+.el-button--large { height: 44px; padding: 0 24px; font-size: var(--fs-md); }
+.el-form-item__label { font-weight: 500; color: var(--cc-text-1) !important; }
+.el-form--label-top .el-form-item__label { margin-bottom: 6px !important; }
+.el-dialog { border-radius: var(--cc-radius) !important; }
+.el-dialog__title { font-weight: 600; }
+.el-drawer__title { font-size: var(--fs-lg); font-weight: 600; color: var(--cc-text-1); }
+.el-tabs__item { font-size: var(--fs-md); }
+.el-input__wrapper, .el-select__wrapper, .el-textarea__inner { box-shadow: 0 0 0 1px var(--cc-border) inset; }
+
+/* 蓝色液态玻璃主题 */
+:root {
+  --cc-primary: #2468e8; --cc-primary-hover: #4381f4; --cc-primary-active: #164fbd;
+  --cc-primary-weak: #eaf2ff; --cc-primary-border: #a9c9ff;
+  --cc-text-1: #142b4f; --cc-text-2: #526784; --cc-text-3: #8193ad;
+  --cc-bg: #eaf3ff; --cc-bg-2: #f2f7ff; --cc-card: rgba(255,255,255,.72);
+  --cc-border: #c9d9f0; --cc-border-light: rgba(255,255,255,.75);
+  --cc-radius: 22px; --cc-radius-sm: 14px;
+  --cc-shadow: 0 12px 36px rgba(38,83,157,.09), inset 0 1px 0 rgba(255,255,255,.9);
+  --cc-shadow-hover: 0 20px 48px rgba(38,83,157,.16), inset 0 1px 0 #fff;
+  --cc-content-w: 1380px; --cc-header-h: 76px;
+  --el-color-primary: #2468e8; --el-color-primary-light-9: #eaf2ff;
+  --el-text-color-primary: #142b4f; --el-text-color-regular: #526784;
+  --el-border-color: #c9d9f0; --el-border-radius-base: 12px;
+}
+body {
+  background: radial-gradient(circle at 8% 12%, #d5e9ff 0, transparent 32%),
+              radial-gradient(circle at 88% 6%, #dce5ff 0, transparent 30%),
+              linear-gradient(145deg, #f0f7ff 0%, #e6f1ff 54%, #f4f8ff 100%);
+  background-attachment: fixed;
+}
+.card, .el-dialog, .el-drawer {
+  background: rgba(255,255,255,.72) !important;
+  border: 1px solid rgba(255,255,255,.85) !important;
+  box-shadow: var(--cc-shadow);
+  backdrop-filter: blur(24px) saturate(160%);
+  -webkit-backdrop-filter: blur(24px) saturate(160%);
+}
+.banner { background: transparent; border: 0; }
+.banner-inner { padding-top: 42px; padding-bottom: 36px; }
+.banner h1, .page-title h1 { letter-spacing: -.035em; font-weight: 720; }
+.pill { border-radius: 999px; padding: 0 10px; }
+.pill.blue, .score.high { color: #155dcb; background: #dcecff; }
+.score.mid { color: #4e73bb; background: #e8efff; }
+.salary { color: #1d65dc; }
+.el-button { border-radius: 12px; }
+.el-button--primary { box-shadow: 0 6px 16px rgba(36,104,232,.2); }
+.el-input__wrapper, .el-select__wrapper, .el-textarea__inner { background: rgba(255,255,255,.68); border-radius: 12px; }
+@media (prefers-reduced-motion: reduce) { *, *::before, *::after { scroll-behavior: auto !important; transition-duration: .01ms !important; animation-duration: .01ms !important; } }
